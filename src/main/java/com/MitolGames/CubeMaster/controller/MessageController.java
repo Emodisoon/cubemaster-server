@@ -17,14 +17,6 @@ import java.util.List;
 public class MessageController {
     private int counter = 4;
 
-    /*
-    private List<Map<String, String>> messages = new ArrayList<Map<String,String>>(){{
-        add(new HashMap<String,String>() {{ put("id", "1"); put("text","Govno"); }});
-        add(new HashMap<String,String>() {{ put("id", "2"); put("text","Gov31no"); }});
-        add(new HashMap<String,String>() {{ put("id", "3"); put("text","Go23vno"); }});
-        add(new HashMap<String,String>() {{ put("id", "4"); put("text","G1ovno"); }});
-    }};
-    */
 
 
     private final MessageRepo messageRepo;

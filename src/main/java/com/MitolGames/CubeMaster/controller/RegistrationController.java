@@ -1,45 +1,39 @@
 package com.MitolGames.CubeMaster.controller;
 
+import com.MitolGames.CubeMaster.domain.Role;
 import com.MitolGames.CubeMaster.domain.User;
-import com.MitolGames.CubeMaster.service.UserService;
+import com.MitolGames.CubeMaster.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.validation.Valid;
+import java.util.Collections;
+import java.util.Map;
 
 @Controller
 public class RegistrationController {
-
     @Autowired
-    private UserService userService;
+    private UserRepo userRepo;
 
     @GetMapping("/registration")
-    public String registration(Model model) {
-        model.addAttribute("userForm", new User());
-
-        return "registration";
+    public String registration(){
+        return registration();
     }
 
     @PostMapping("/registration")
-    public String addUser(@ModelAttribute("userForm") @Valid User userForm, BindingResult bindingResult, Model model) {
-
-        if (bindingResult.hasErrors()) {
-            return "registration";
-        }
-        if (!userForm.getPassword().equals(userForm.getPasswordConfirm())){
-            model.addAttribute("passwordError", "Пароли не совпадают");
-            return "registration";
-        }
-        if (!userService.saveUser(userForm)){
-            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
+    public String addUser(User user, Map<String, Object> model){
+        User userFromDb =  userRepo.findByUserName(user.getUserName());
+        //TODO: в таймлифе найти условия и выводить ошибку не уникальности пользователя
+        if(userFromDb!=null){
+            model.put("message", "User exists");
             return "registration";
         }
 
-        return "redirect:/";
+        user.setActive(true);
+        user.setRoles(Collections.singleton(Role.USER));
+        userRepo.save(user);
+
+        return "redirect:/login";
     }
 }
