@@ -1,13 +1,10 @@
 package com.MitolGames.CubeMaster.domain;
 
 import com.MitolGames.CubeMaster.domain.User;
-import org.springframework.data.annotation.Id;
+
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
