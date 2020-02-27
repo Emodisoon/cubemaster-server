@@ -6,9 +6,9 @@
 </head>
 <body>
 <p>Add new user</p>
-<form th:action="@{/registration}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
+<form th:action="@{/registration}" th:object="${new_user}" method="post">
+    <div><label> User Name : <input th:field="*{username}" type="text" name="username"/> </label></div>
+    <div><label> Password: <input th:field="*{password}" type="password" name="password"/> </label></div>
     <div><input type="submit" value="Sign In"/></div>
 </form>
 </body>

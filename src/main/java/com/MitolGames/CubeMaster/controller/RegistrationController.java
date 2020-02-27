@@ -5,6 +5,7 @@ import com.MitolGames.CubeMaster.domain.User;
 import com.MitolGames.CubeMaster.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -17,13 +18,14 @@ public class RegistrationController {
     private UserRepo userRepo;
 
     @GetMapping("/registration")
-    public String registration(){
-        return registration();
+    public String registration(Model model){
+        model.addAttribute("new_user", new User());
+        return "registration";
     }
 
     @PostMapping("/registration")
     public String addUser(User user, Map<String, Object> model){
-        User userFromDb =  userRepo.findByUserName(user.getUserName());
+        User userFromDb =  userRepo.findByUsername(user.getUsername());
         //TODO: в таймлифе найти условия и выводить ошибку не уникальности пользователя
         if(userFromDb!=null){
             model.put("message", "User exists");
