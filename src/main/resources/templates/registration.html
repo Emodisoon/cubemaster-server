@@ -5,7 +5,7 @@
     <title>Spring Security Example </title>
 </head>
 <body>
-<p>Add new user</p>
+<p>Add new applictaionUser</p>
 <form th:action="@{/registration}" th:object="${new_user}" method="post">
     <div><label> User Name : <input th:field="*{username}" type="text" name="username"/> </label></div>
     <div><label> Password: <input th:field="*{password}" type="password" name="password"/> </label></div>
