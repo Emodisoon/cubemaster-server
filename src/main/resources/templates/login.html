@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Spring Security Example </title>
 </head>
 <body>
@@ -17,5 +20,25 @@
     <div><input type="submit" value="Sign In"/></div>
 </form>
 <a href="/registration">Регистрация</a>
+<div id="app">
+    {{ message }}
+    <button @click="getToken()"></button>
+</div>
 </body>
+<script>
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Привет, Vue!'
+  },
+  methods:{
+  	getToken(){
+  		axios.get('https://dka-develop.ru/api?type=hashtag').then((response) => {
+  			console.log(response);});
+  		
+  	}
+  }
+
+})
+</script>
 </html>

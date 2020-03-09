@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -53,4 +54,5 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .sign(HMAC512(SECRET.getBytes()));
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
     }
+
 }
