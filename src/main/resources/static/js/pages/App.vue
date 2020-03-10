@@ -1,24 +1,32 @@
-var app = new Vue({
-  el: '#app',
-  template: '<messages-list :messages="messages"/>',
-  data: {
-    messages: [
+<template>
+    <v-app>
+        <v-app-bar color="blue" dense app>
+            <v-toolbar-title>CubeMaster</v-toolbar-title>
+            <v-spacer></v-spacer>
+            {{username}}
+            <v-btn icon href="/login">
+                <v-icon>mdi-arrow-left</v-icon>
+            </v-btn>
+        </v-app-bar>
 
-    ]
-  }
+        <v-content>
+            <messages-list :messages="messages"/>
+        </v-content>
 
- <template>
-    <messages-list :messages="messages"/>
- </template>
 
- <script>
+    </v-app>
+</template>
+
+<script>
     import MessagesList from 'components/messages/MessageList.vue'
     export default {
         components: {
             MessagesList
         },
         data() {
-        return {messages: []}
+            return {messages: [],
+                username: "Emodisoon"
+            }
         }
     }
- </script>
+</script>
