@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import MessagesList from 'components/messages/MessageList.vue'
 import login from 'components/login.vue'
-import logout from 'components/logout.vue'
+import register from "../components/register.vue";
 
 Vue.use(VueRouter)
 
@@ -18,13 +18,9 @@ const routes = [
         component: login
     },
     {
-        path: '/logout',
-        component: logout,
-        meta: { requiresAuth: true }
-    },
-    {
         path: '/reg',
         name: "registration",
+        component: register
     }
 ]
 

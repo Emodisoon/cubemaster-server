@@ -4,16 +4,32 @@
         <v-app-bar color="blue" dense app>
             <v-toolbar-title><router-link to='/'>CubeMaster</router-link></v-toolbar-title>
             <v-spacer></v-spacer>
-            <div v-if="getAuth">
+            <v-toolbar-title class="px-5" v-if="getAuth">
                 Добро пожаловать, {{getUserName}}
-            </div>
-            <v-spacer></v-spacer>
-            <router-link to='/logout'>логаут</router-link>
-            <router-link to="/login">
-                <v-btn v-if="!getAuth" icon href="/login">
-                    <v-icon>input</v-icon>
-                </v-btn>
-            </router-link>
+            </v-toolbar-title>
+
+            <v-toolbar-title class="exit px-5" @click="logoutNow"  v-if="getAuth">
+
+                    (Выход)
+
+            </v-toolbar-title>
+
+
+            <v-toolbar-title v-if="!getAuth">(</v-toolbar-title>
+                <router-link v-if="!getAuth"to="/login">
+                    <v-toolbar-title>
+                        Авторизация
+                    </v-toolbar-title>
+                </router-link> <v-toolbar-title v-if="!getAuth">|</v-toolbar-title>
+
+                <router-link v-if="!getAuth" to="/reg">
+                    <v-toolbar-title>
+                        Регистрация
+                    </v-toolbar-title>
+                </router-link>
+            <v-toolbar-title v-if="!getAuth">)</v-toolbar-title>
+
+
         </v-app-bar>
 
         <v-content>
@@ -22,12 +38,22 @@
             <router-view></router-view>
         </v-content>
 
+        <v-footer color="blue" padless>
+            <v-col
+                    class="text-center"
+                    cols="12"
+            >
+                {{ new Date().getFullYear() }} — <strong><router-link to='/'>CubeMaster</router-link></strong>
+            </v-col>
+        </v-footer>
+
     </v-app>
 </template>
 
 <script>
 
     import {mapActions, mapGetters, mapMutations} from 'vuex'
+    import router from "../router/router";
 
     export default {
 
@@ -35,6 +61,13 @@
             ...mapActions(['getMessageAction', 'getTokenAction']),
             ...mapMutations(['setTokenMutation']),
 
+        methods:{
+            logoutNow(){
+                console.log('Logout')
+                this.$store.commit('logOutMutation')
+                router.push('/login')
+            }
+        },
 
         created() {
             if(localStorage.getItem('auth')==='true'){
@@ -54,5 +87,8 @@
     a:visited{
         color: black;
         text-decoration: none;
+    }
+    .exit:hover{
+        cursor: pointer;
     }
 </style>

@@ -1,8 +1,5 @@
 <template>
-    <v-container
-
-
-    >
+    <v-container class="login">
         <v-card class="elevation-12 pa-10" border="3px" >
 
             <v-form align="center" justify="center">
@@ -23,6 +20,11 @@
                         type="password"
                 />
                 <v-btn @click="makeAuth" color="primary">Авторизация</v-btn>
+                <v-btn color="primary">
+                    <router-link to="/reg">
+                        Регистрация
+                    </router-link>
+                </v-btn>
             </v-form>
 
         </v-card>
@@ -64,7 +66,7 @@
                         router.push('/')
                     }
                 } catch(err){
-                    this.errorText = "Ошибка авторизации. Возомжно вы не правильно ввели логин/пароль."
+                    this.errorText = "Ошибка авторизации."
                 }
 
 
@@ -77,5 +79,16 @@
 <style scoped>
     .err{
         color: red;
+    }
+    .login{
+        max-width: 25%;
+    }
+    a:link{
+        color: white;
+        text-decoration: none;
+    }
+    a:visited{
+        color: white;
+        text-decoration: none;
     }
     </style>
