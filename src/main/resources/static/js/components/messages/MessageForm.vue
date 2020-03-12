@@ -16,7 +16,7 @@
     }
 
     export default{
-        props: ['messages', 'messageAttr'],
+        props: ['messageAttr'],
             data: function(){
                     return {
                     text: '',

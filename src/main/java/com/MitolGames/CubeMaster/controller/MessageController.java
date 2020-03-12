@@ -58,6 +58,7 @@ public class MessageController {
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable("id") Message message){
+        System.out.println("got del req");
         messageRepo.delete(message);
     }
 }

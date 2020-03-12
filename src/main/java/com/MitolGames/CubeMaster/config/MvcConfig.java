@@ -15,12 +15,14 @@ public class MvcConfig implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
 
         registry.addViewController("/").setViewName("home");
+        registry.addViewController("/forbiden").setViewName("forbiden");
     }
 
     @Bean
     WebServerFactoryCustomizer<ConfigurableWebServerFactory> webServerCustomizer(){
         return container -> {
             container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/"));
+            container.addErrorPages(new ErrorPage(HttpStatus.FORBIDDEN, "/forbiden"));
         };
     }
 

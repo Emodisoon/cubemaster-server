@@ -1,32 +1,58 @@
 <template>
     <v-app>
+
         <v-app-bar color="blue" dense app>
-            <v-toolbar-title>CubeMaster</v-toolbar-title>
+            <v-toolbar-title><router-link to='/'>CubeMaster</router-link></v-toolbar-title>
             <v-spacer></v-spacer>
-            {{username}}
-            <v-btn icon href="/login">
-                <v-icon>mdi-arrow-left</v-icon>
-            </v-btn>
+            <div v-if="getAuth">
+                Добро пожаловать, {{getUserName}}
+            </div>
+            <v-spacer></v-spacer>
+            <router-link to='/logout'>логаут</router-link>
+            <router-link to="/login">
+                <v-btn v-if="!getAuth" icon href="/login">
+                    <v-icon>input</v-icon>
+                </v-btn>
+            </router-link>
         </v-app-bar>
 
         <v-content>
-            <messages-list :messages="messages"/>
-        </v-content>
+            <v-toolbar-title >{{getToken}}</v-toolbar-title>
 
+            <router-view></router-view>
+        </v-content>
 
     </v-app>
 </template>
 
 <script>
-    import MessagesList from 'components/messages/MessageList.vue'
+
+    import {mapActions, mapGetters, mapMutations} from 'vuex'
+
     export default {
-        components: {
-            MessagesList
-        },
-        data() {
-            return {messages: [],
-                username: "Emodisoon"
+
+        computed: mapGetters(['getToken', 'getAuth', 'getUserName']),
+            ...mapActions(['getMessageAction', 'getTokenAction']),
+            ...mapMutations(['setTokenMutation']),
+
+
+        created() {
+            if(localStorage.getItem('auth')==='true'){
+                this.$store.commit('setTokenMutation', localStorage.getItem('token'))
+                this.$store.commit('setUserNameMutation', localStorage.getItem('username'))
             }
         }
+
     }
 </script>
+
+<style scoped>
+    a:link{
+        color: black;
+        text-decoration: none;
+    }
+    a:visited{
+        color: black;
+        text-decoration: none;
+    }
+</style>
