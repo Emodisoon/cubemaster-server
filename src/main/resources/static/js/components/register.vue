@@ -27,6 +27,10 @@
 </template>
 
 <script>
+    import Vue from "vue";
+    import jwt from "jsonwebtoken";
+    import router from "../router/router";
+
     export default {
         data(){
             return{
@@ -36,8 +40,19 @@
             }
         },
         methods:{
-            register(){
-                //TODO: реализовать регистрацию
+            async register(){
+                let data = {
+                    userName: this.username,
+                    password: this.password
+                }
+                try {
+                    const result = await Vue.http.post('http://192.168.0.12:8080/main/registration', data)
+                    if (result.ok) {
+                        router.push('/login')
+                    }
+                } catch(err){
+                    this.errorText = "Ошибка Регистрации."
+                }
             }
         }
     }

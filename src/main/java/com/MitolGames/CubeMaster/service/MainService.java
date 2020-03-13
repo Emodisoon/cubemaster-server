@@ -19,11 +19,6 @@ public class MainService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    public String getGreeting() {
-
-        return "You could and created JWT authentication!";
-    }
-
     public ApplictaionUser create(CreateUserModel userModel) {
 
         ApplictaionUser applicationUser = new ApplictaionUser();

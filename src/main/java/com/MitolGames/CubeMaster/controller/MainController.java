@@ -16,16 +16,11 @@ class MainController {
         this.mainService = mainService;
     }
 
-    @GetMapping("greeting")
-    public String getGreeting() {
-
-        return mainService.getGreeting();
-    }
 
     @PostMapping("registration")
     @ResponseStatus(HttpStatus.CREATED)
     public ApplictaionUser create(@RequestBody CreateUserModel userModel) {
-
+        System.out.println(userModel);
         return mainService.create(userModel);
     }
 }
