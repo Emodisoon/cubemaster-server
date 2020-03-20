@@ -4,7 +4,7 @@
 
             <v-form align="center" justify="center">
                 <h1>Регистрация</h1>
-                <v-toolbar-title align="center" class="err">{{errorText}}</v-toolbar-title>
+                <v-toolbar-title align="center" class="err"><p >{{errorText}}</p></v-toolbar-title>
                 <v-text-field
                         label="Логин"
                         v-model="username"
@@ -48,10 +48,15 @@
                 try {
                     const result = await Vue.http.post('http://192.168.0.12:8080/main/registration', data)
                     if (result.ok) {
-                        router.push('/login')
+                        if(result.bodyText === "success"){
+                            router.push('/login')
+                        }
+                        else{
+                            this.errorText = "Ошибка pегистрации."
+                        }
                     }
                 } catch(err){
-                    this.errorText = "Ошибка Регистрации."
+                    this.errorText = "Ошибка pегистрации."
                 }
             }
         }

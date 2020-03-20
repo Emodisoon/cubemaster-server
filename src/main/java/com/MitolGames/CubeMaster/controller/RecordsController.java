@@ -30,8 +30,6 @@ public class RecordsController {
     public String records(Model model){
         List<Message> msgs = messageRepo.findAll();
 
-        String message = "Sosi";
-        model.addAttribute("message", message);
         model.addAttribute("records", msgs);
 
         return "records";

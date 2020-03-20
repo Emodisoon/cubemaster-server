@@ -6,9 +6,10 @@ import vuetify from "./plugins/vuetify";
 import 'vuetify/dist/vuetify.min.css'
 import '@babel/polyfill'
 import store from 'store/store.js'
+import VueMoment from 'vue-moment'
 
 Vue.use(VueResource)
-
+Vue.use(require('vue-moment'));
 
 
 new Vue({

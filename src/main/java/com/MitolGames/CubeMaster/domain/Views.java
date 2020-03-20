@@ -4,4 +4,6 @@ public final class Views {
     public interface IdName{}
 
     public interface FullMessage extends IdName{}
+
+    public interface PublicUserInfo{}
 }

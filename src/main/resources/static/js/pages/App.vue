@@ -5,7 +5,7 @@
             <v-toolbar-title><router-link to='/'>CubeMaster</router-link></v-toolbar-title>
             <v-spacer></v-spacer>
             <v-toolbar-title class="px-5" v-if="getAuth">
-                Добро пожаловать, {{getUserName}}
+                <router-link :to="{ name: 'user', params: { username: getUserName }}"> Добро пожаловать, {{getUserName}}</router-link>
             </v-toolbar-title>
 
             <v-toolbar-title class="exit px-5" @click="logoutNow"  v-if="getAuth">
@@ -33,7 +33,6 @@
         </v-app-bar>
 
         <v-content>
-            <v-toolbar-title >{{getToken}}</v-toolbar-title>
 
             <router-view></router-view>
         </v-content>
@@ -58,7 +57,7 @@
     export default {
 
         computed: mapGetters(['getToken', 'getAuth', 'getUserName']),
-            ...mapActions(['getMessageAction', 'getTokenAction']),
+            ...mapActions(['getTokenAction', 'getTimeRecordsAction']),
             ...mapMutations(['setTokenMutation']),
 
         methods:{
@@ -73,7 +72,10 @@
             if(localStorage.getItem('auth')==='true'){
                 this.$store.commit('setTokenMutation', localStorage.getItem('token'))
                 this.$store.commit('setUserNameMutation', localStorage.getItem('username'))
+
+                this.$store.dispatch('getTimeRecordsAction')
             }
+
         }
 
     }

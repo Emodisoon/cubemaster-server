@@ -1,12 +1,25 @@
 package com.MitolGames.CubeMaster.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.*;
 
 
 @Entity
 @Table(name = "user_table")
 public class ApplictaionUser {
+    @JsonView(Views.PublicUserInfo.class)
+    @Column(name = "user_name")
+    String userName;
+
+    @Column(name = "password")
+    String password;
+    @JsonView(Views.PublicUserInfo.class)
+    @Column(name = "id", updatable = false, nullable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usr_sequence")
+    Long id;
 
     public String getUserName() {
         return userName;
@@ -32,14 +45,4 @@ public class ApplictaionUser {
         this.id = id;
     }
 
-    @Column(name = "user_name")
-    String userName;
-
-    @Column(name = "password")
-    String password;
-
-    @Column(name = "id", updatable = false, nullable = false)
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usr_sequence")
-    Long id;
 }
