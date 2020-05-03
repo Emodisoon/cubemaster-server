@@ -11,6 +11,7 @@ export default new Vuex.Store({
         jwtToken: "",
         auth: false,
         username: "",
+        isAdmin: false,
     },
 
     getters:{
@@ -20,14 +21,14 @@ export default new Vuex.Store({
         getUserName(state){
             return state.username
         },
-        getMessages(state){
-            return state.messages
-        },
         getToken(state){
             return state.jwtToken
         },
         getAuth(state){
             return state.auth
+        },
+        getAdmin(state){
+            return state.isAdmin
         }
     },
     actions:{
@@ -56,6 +57,14 @@ export default new Vuex.Store({
                     ...state.timeRecords.slice(deletionIndex + 1)
                 ]
             }
+        },
+        setAdminMutationTrue(state){
+            state.isAdmin = true;
+            localStorage.setItem('isAdmin', "true")
+        },
+        setAdminMutationFalse(state){
+            state.isAdmin = false;
+            localStorage.setItem('isAdmin', "false")
         },
         setUserNameMutation(state, name){
             state.username = name;

@@ -1,25 +1,27 @@
 package com.MitolGames.CubeMaster.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "timerecord_table")
 public class TimeRecord {
-
+    @JsonView({Views.PersonalTr.class})
     @Column(name = "id", updatable = false, nullable = false)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-
+    @JsonView({Views.PersonalTr.class})
     @Column(name = "time", updatable = false, nullable = false)
     Long time;
 
     @JoinColumn(name="user_id", updatable = false, nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     ApplictaionUser user;
-
+    @JsonView({Views.PersonalTr.class})
     @Column(name = "Scramble")
     String scramble;
 
@@ -32,10 +34,9 @@ public class TimeRecord {
     public void setUserID(long userID) {
         this.userID = userID;
     }
-
+    @JsonView({Views.PersonalTr.class})
     @Column(name = "Date")
     private LocalDateTime creationDate;
-
     public LocalDateTime getCreationDate() {
         return creationDate;
     }

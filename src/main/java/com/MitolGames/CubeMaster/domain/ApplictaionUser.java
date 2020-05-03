@@ -13,6 +13,9 @@ public class ApplictaionUser {
     @Column(name = "user_name")
     String userName;
 
+    @Column(name = "is_admin")
+    Boolean isAdmin;
+
     @Column(name = "password")
     String password;
     @JsonView(Views.PublicUserInfo.class)
@@ -21,8 +24,18 @@ public class ApplictaionUser {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usr_sequence")
     Long id;
 
+
+
     public String getUserName() {
         return userName;
+    }
+
+    public Boolean getAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        isAdmin = admin;
     }
 
     public void setUserName(String userName) {
@@ -44,5 +57,7 @@ public class ApplictaionUser {
     public void setId(Long id) {
         this.id = id;
     }
+
+    
 
 }

@@ -48,7 +48,7 @@
         },
 
         methods: {
-            ...mapActions(['getTokenAction']), ...mapMutations(['setUserNameMutation',"setTokenMutation"]),
+            ...mapActions(['getTokenAction']), ...mapMutations(['setUserNameMutation',"setTokenMutation", "setAdminMutationTrue", "setAdminMutationFalse"]),
 
             async makeAuth(){
                 let data = {
@@ -63,9 +63,19 @@
                         let decoded = jwt.verify(token, 'SecretKeyToGenJWTs')
                         this.setUserNameMutation(decoded.sub)
                         this.setTokenMutation(result.headers.get('authorization'))
+
+
+
+                        const isAdmin = await Vue.http.get('http://192.168.0.12:8080/api/userIsAdmin/'+ this.username, {headers: {'Authorization': result.headers.get('authorization')}})
+                        console.log(isAdmin)
+                        if(isAdmin.bodyText==="true")
+                            this.setAdminMutationTrue()
+                        if(isAdmin.bodyText==="false")
+                            this.setAdminMutationFalse()
                         router.push('/')
                     }
                 } catch(err){
+                    console.log(err)
                     this.errorText = "Ошибка авторизации."
                 }
 

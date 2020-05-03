@@ -24,7 +24,6 @@ public class RegistrationController {
     @PostMapping("/registration")
     public String addUser(ApplictaionUser applictaionUser, Map<String, Object> model){
         ApplictaionUser applictaionUserFromDb =  userRepo.findByUserName(applictaionUser.getUserName());
-        //TODO: в таймлифе найти условия и выводить ошибку не уникальности пользователя
         if(applictaionUserFromDb !=null){
             model.put("message", "User exists");
             return "registration";
