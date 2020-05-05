@@ -3,6 +3,9 @@
             class="mx-auto my-7"
             max-width="95%"
     >
+        <v-toolbar-title class="text-center">
+            <h1>Список пользователей</h1>
+        </v-toolbar-title>
         <v-simple-table>
             <template v-slot:default>
                 <thead>
