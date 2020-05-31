@@ -12,3 +12,5 @@
   - Web сервер: Spring
   - Фронтенд: Vue.js с использованием библиотек Vue resource, Vuex, Vue router
   - База данных: PostgreSQL
+
+### Cсылка на клиент: https://gitlab.com/akcenengr/cubemaster-client
